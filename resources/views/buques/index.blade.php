@@ -32,7 +32,7 @@
                         <td><a href="{{route('buque.view',$buque)}}">{{ $buque->code }}</a></td>
                         <td>{{ $buque->nombre }}</td>
                         <td>{{ $buque->localidad->nombre }}</td>
-                        <td><button type="button" class="btn btn-primary" onclick="locate({{$buque->lat}},{{$buque->lon}})">Localizar</button></td>
+                        <td><button type="button" class="btn btn-primary" onclick="locate({{$buque->tracker->lat}},{{$buque->tracker->lon}})">Localizar</button></td>
                         <td><a class="btn btn-primary" href="{{route('buque.view',$buque)}}" role="button">Ver Registros</a></td>
                         <td>
                             <form onsubmit="return confirm('Desea Eliminarlo?');" action="{{ route('buque.delete', $buque) }}" method="POST">
@@ -94,6 +94,7 @@ $(document).ready( function () {
     //    window.location.reload(1);
     // }, 10000);
     var mymap = L.map('mapid').setView([-17.393879, -66.156943], 13);
+    // L.tileLayer('{{asset('mapas/{z}/{x}/{y}.png')}}', {
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(mymap);

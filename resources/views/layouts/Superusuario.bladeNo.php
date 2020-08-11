@@ -18,54 +18,7 @@
   <body>
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
       <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">TNR-TRACKER root</a>
-      <ul class="nav nav-tabs">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-            <span style="color:white;" data-feather="users"></span>Usuarios</a>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="{{ route('users.index') }}">Lista de Usuarios</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="{{ route('user.create') }}">Registrar Usuarios</a>
-          </div>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-            <span style="color:white;" data-feather="map"></span>Localidades</a>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="{{ route('localidades.index') }}">Lista de Localidades</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="{{ route('localidad.create') }}">Registrar Localidad</a>
-          </div>
-        </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                {{-- <span style="color:white;" data-feather="ship"></span> --}}
-                <i style="color:white;" class="fas fa-ship"></i>
-                Unidades de Superficie</a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="{{ route('buques.index') }}">Lista de UU.SS.</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="{{ route('buque.create') }}">Registrar UU.SS.</a>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                <i style="color:white;" class="fas fa-user-cog"></i>Tripulacion</a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="{{route('tripulacion.index')}}"> Lista de Tripulacion</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="{{route('tripulacion.create')}}">Registrar Tripulacion</a>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                <i style="color:white;" class="fas fa-pager"></i>Tracker</a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="{{ route('trackers.index') }}"> Lista de Trackers</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="{{ route('tracker.create') }}">Registrar Trackers</a>
-            </div>
-          </li>
+      <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
         <a class="nav-link" href="{{ route('logout') }}">SALIR</a>
         </li>
@@ -74,7 +27,7 @@
 
     <div class="container-fluid">
       <div class="row">
-        {{-- <nav class="col-md-2 d-none d-md-block bg-light sidebar bg-dark">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar bg-dark">
           <div class="sidebar-sticky">
             <ul class="nav flex-column">
               <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -85,7 +38,6 @@
                   <span style="color:white;" data-feather="user-plus"></span>
                   Acciones por Role
                 </a>
-
               </li>
               <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
                 <span style="color:white;">Usuarios</span><!--Solo ve el administrador a los usuarios -->
@@ -107,7 +59,7 @@
               </h6>
               <li class="nav-item">
                 <a class="nav-link text-light" href="{{ route('localidades.index') }}">
-                  <span style="color:white;" data-feather="command"></span>
+                  <span style="color:white;" data-feather="map"></span>
                   Lista de Localidades
                 </a>
               </li>
@@ -122,7 +74,8 @@
               </h6>
               <li class="nav-item">
                 <a class="nav-link text-light" href="{{ route('buques.index') }}">
-                  <span style="color:white;" data-feather="truck"></span>
+                  {{-- <span style="color:white;" data-feather="ship"></span> --}}
+                  <i class="fas fa-ship"></i>
                   Lista de UU.SS.
                 </a>
               </li>
@@ -137,13 +90,14 @@
               </h6>
               <li class="nav-item">
                 <a class="nav-link text-light" href="{{route('tripulacion.index')}}">
-                  <span style="color:white;" data-feather="map"></span>
+                  {{-- <span style="color:white;" data-feather="map"></span> --}}
+                  <i class="fas fa-users"></i>
                   Lista de Tripulacion
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link text-light" href="{{route('tripulacion.create')}}">
-                  <span style="color:white;" data-feather="map-pin"></span>
+                  <i class="fas fa-user-cog"></i>
                   Registrar Tripulacion
                 </a>
               </li>
@@ -152,7 +106,8 @@
               </h6>
               <li class="nav-item">
                 <a class="nav-link text-light" href="{{ route('trackers.index') }}">
-                  <span style="color:white;" data-feather="command"></span>
+                  {{-- <span style="color:white;" data-feather="command"></span> --}}
+                  <i class="fas fa-pager"></i>
                   Lista de Trackers
                 </a>
               </li>
@@ -164,7 +119,7 @@
               </li>
             </ul>
           </div>
-        </nav> --}}
+        </nav>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
           @yield('content')
