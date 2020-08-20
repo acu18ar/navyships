@@ -9,18 +9,22 @@ crossorigin=""/>
 <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
 integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
 crossorigin=""></script>
-<link rel="stylesheet" type="text/css" href="{{asset('DataTables/datatables.min.css')}}"/>
+{{-- <link rel="stylesheet" type="text/css" href="{{asset('DataTables/datatables.min.css')}}"/> --}}
 <script type="text/javascript" src="{{asset('DataTables/datatables.min.js')}}"></script>
 <script src="{{ asset('DataTables/dataTables.select.min.js') }}"></script>
-<div class="card">
+<div class="card" style="overflow-x:auto;">
     <h2 class="card-header">
         {{$buque->code}} - {{$buque->nombre}} - {{$buque->localidad->nombre}}
     </h2>
-    <div class="card-body">
+    <div class="card-body" >
         <p>{{$buque->description}}</p>
+        <h6>Rango de fechas: <input type="date" name="fechaesperada"><input type="date" name="fechaespderada"> <input type="submit" value="Generar"><input type="submit" value="Actualizar"></h6>
+
         <table id="tableID" class="table">
             <thead class="thead-dark">
                 <tr>
+                    {{-- <th scope="col">#</th> --}}
+                    <th scope="col">V</th>
                     <th scope="col">#</th>
                     <th scope="col">Latitud</th>
                     <th scope="col">Longitud</th>
@@ -31,6 +35,8 @@ crossorigin=""></script>
             <tbody id="tBody">
                 @foreach($buque->tracker->positions as $hist)
                     <tr>
+                        {{-- <th scope="row">{{ $hist->id }}</th> --}}
+                        <th scope="row"><input type="checkbox"></input></th>
                         <th scope="row">{{ $hist->id }}</th>
                         <th scope="row">{{ $hist->lat }}</th>
                         <th scope="row">{{ $hist->lon }}</th>
@@ -98,6 +104,8 @@ setInterval(function(){
             }
             content+=`
                 <tr>
+                    {{--la actualizacion a llamada de WS--}}
+                    <th scope="row"><input type="checkbox"></input></th>
                     <th scope="row">${item['id']}</th>
                     <th scope="row">${item['lat']}</th>
                     <th scope="row">${item['lon']}</th>
@@ -113,15 +121,34 @@ var mymap = L.map('mapid').setView([-17.393879, -66.156943], 13);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(mymap);
+
+// var ruta = L.polyline([
+//         [-18.92, -66.211112],
+//         [-17.922, -66.211112],
+//         [-17.03200, -68.21111],
+//     ],{color:'black'}).addTo(mymap);
+
+    var ruta = L.polyline(
+        [
+    @foreach($buque->tracker->positions as $hist)
+        [{{$hist->lat}},{{$hist->lon}}],
+@endforeach
+],{color:'black'}).addTo(mymap);
+
+
 @if(isset($buque->tracker->positions[0]))
     var marker = L.marker([{{$buque->tracker->positions[0]->lat}}, {{$buque->tracker->positions[0]->lon}}]).addTo(mymap);
 @endif
+
+// para el rango de fechas las lineas de trayectoria...
+
+
 </script>
 <script>
     function locate(lat, lng) {
         var newLatLng = new L.LatLng(lat, lng);
         marker.setLatLng(newLatLng);
-        mymap.setView(marker.getLatLng(),mymap.getZoom()); 
+        mymap.setView(marker.getLatLng(),mymap.getZoom());
     }
 </script>
 @endsection
