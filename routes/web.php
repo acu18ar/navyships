@@ -58,9 +58,11 @@ Route::middleware('checkAuth')->group(function () {
 
     //Buques
     Route::get('/buques/index','ShipController@index')->name('buques.index');
+    Route::get('/buques/index2','ShipController@index2')->name('buques.index2'); //la segunda por si acaso
     Route::get('/buque/create','ShipController@create')->name('buque.create');
     Route::get('/buque/edit/{buque}','ShipController@edit')->name('buque.edit');
     Route::get('/buque/view/{buque}','ShipController@view')->name('buque.view');
+    Route::get('/buque/viewRep/{buque}','ShipController@viewRep')->name('buque.viewRep');
 
     Route::get('/api/buque/getDates/{buque}','ShipController@getDates')->name('buque.dates');
 

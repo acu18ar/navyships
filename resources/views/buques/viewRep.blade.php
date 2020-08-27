@@ -1,6 +1,6 @@
 @extends('layouts.'.Auth::user()->role->name)
 @section('title')
-Reporte UUSS: {{$buque->nombre}}
+Reporte Especifico: {{$buque->nombre}}
 @endsection
 @section('content')
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
@@ -16,17 +16,10 @@ crossorigin=""></script>
     <h2 class="card-header">
         {{$buque->code}} - {{$buque->nombre}} - {{$buque->localidad->nombre}}
     </h2>
-
-    <div>
-        <tr>
-            <td><h5>{{$buque->description}} </h5></td>
-            <td><a class="btn btn-primary btn-lg" href="{{route('buque.viewRep',$buque)}}" role="button">Reporte</a></td>
-
-        </tr>
-    </div>
+    <p>{{$buque->description}}</p>
+    <h6>Rango de fechas: <input type="date" name="fechaesperada"><input type="date" name="fechaespderada"> <input type="submit" value="Generar"><input type="submit" value="Actualizar"></h6>
 
     <div class="card-body" >
-
         <table id="tableID" class="table" >
             <thead class="thead-dark">
                 <tr>
@@ -39,7 +32,7 @@ crossorigin=""></script>
                     <th class="no-sort" scope="col"></th>
                 </tr>
             </thead>
-            <tbody id="tBody">
+            {{-- <tbody id="tBody"> --}}
                 @foreach($buque->tracker->positions as $hist)
                     <tr>
                         {{-- <th scope="row">{{ $hist->id }}</th> --}}
@@ -51,9 +44,10 @@ crossorigin=""></script>
                         <td><button type="button" class="btn btn-primary" onclick="locate({{$hist->lat}},{{$hist->lon}})">LOCALIZAR</button></td>
                     </tr>
                 @endforeach
-            </tbody>
+                <div id="mapid" style="height: 400px;"></div>
+            {{-- </tbody> --}}
         </table>
-        <div id="mapid" style="height: 400px;"></div>
+        {{-- <div id="mapid" style="height: 400px;"></div> --}}
     </div>
 </div>
 <style>
@@ -106,8 +100,8 @@ $(document).ready( function () {
                 }
             }
         ],
-        //"order": [[ 0, "desc" ]],
-        "ordering": false,
+        "order": [[ 1, "desc" ]],
+        "ordering": true,
         columnDefs: [
             { orderable: false, targets: "no-sort"}
         ],
@@ -116,32 +110,32 @@ $(document).ready( function () {
 </script>
 <script>
 var idBuque={{$buque->id}};
-setInterval(function(){
-//   window.location.reload(1);
-    $.get(`/api/buque/getDates/${idBuque}`, function( data ) {
-        console.log(data);
-        var content='';
-        var first=true;
-        data.forEach(function(item){
-            if (first) {
-                first=false;
-                locate(item['lat'],item['lon']);
-            }
-            content+=`
-                <tr>
-                    {{--la actualizacion a llamada de WS--}}
-                    <th scope="row"><input type="checkbox"></input></th>
-                    <th scope="row">${item['id']}</th>
-                    <th scope="row">${item['lat']}</th>
-                    <th scope="row">${item['lon']}</th>
-                    <td>${item['created_at']}</td>
-                    <td><button type="button" class="btn btn-primary" onclick="locate(${item['lat']},${item['lon']})">LOCALIZAR</button></td>
-                </tr>
-            `;
-        });
-        document.getElementById('tBody').innerHTML=content;
-    });
-}, 5000);
+// setInterval(function(){
+// //   window.location.reload(1);
+//     $.get(`/api/buque/getDates/${idBuque}`, function( data ) {
+//         console.log(data);
+//         var content='';
+//         var first=true;
+//         data.forEach(function(item){
+//             if (first) {
+//                 first=false;
+//                 locate(item['lat'],item['lon']);
+//             }
+//             content+=`
+//                 <tr>
+//                     {{--la actualizacion a llamada de WS--}}
+//                     <th scope="row"><input type="checkbox"></input></th>
+//                     <th scope="row">${item['id']}</th>
+//                     <th scope="row">${item['lat']}</th>
+//                     <th scope="row">${item['lon']}</th>
+//                     <td>${item['created_at']}</td>
+//                     <td><button type="button" class="btn btn-primary" onclick="locate(${item['lat']},${item['lon']})">LOCALIZAR</button></td>
+//                 </tr>
+//             `;
+//         });
+//         document.getElementById('tBody').innerHTML=content;
+//     });
+// }, 5000);
 var mymap = L.map('mapid').setView([-17.393879, -66.156943], 13);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

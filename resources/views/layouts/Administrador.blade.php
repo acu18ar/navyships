@@ -49,7 +49,7 @@
                 <span style="color:white;">Unidades de Superficie</span>
               </h6>
               <li class="nav-item">
-                <a class="nav-link text-light" href="{{ route('buques.index') }}">
+                <a class="nav-link text-light" href="{{ route('buques.index2') }}">
                     <i class="fas fa-ship"></i>
                     Lista de UU.SS. <!--Las listas incluye opciones de editar y eliminar -->
                 </a>

@@ -79,7 +79,7 @@
 {{-- HASTA AQUI --}}
 
     <div class="container-fluid">
-      <div class="row">
+
         {{-- <nav class="col-md-2 d-none d-md-block bg-light sidebar bg-dark">
           <div class="sidebar-sticky">
             <ul class="nav flex-column">
@@ -172,10 +172,10 @@
           </div>
         </nav> --}}
 
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+        <main role="main" >
           @yield('content')
         </main>
-      </div>
+
     </div>
     <script src="{{asset('js/popper.min.js')}}"></script>
     <script src="{{asset('js/bootstrap.min.js')}}"></script>

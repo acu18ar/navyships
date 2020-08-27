@@ -1,30 +1,84 @@
+<?php ob_start("comprimir_pagina"); ?>
+
 
 @extends('layouts.'.Auth::user()->role->name)
 {{-- realizar un if para ver si puede eliminar o editar.. --}}
-@section('title','Unidades de Superficie1')
+@section('title','Unidades de Superficie')
 @section('content')
-<script src="{{asset('js/leaflet.js')}}"></script>
-<link rel="stylesheet" type="text/css" href="{{asset('DataTables/datatables.min.css')}}"/>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="{{ asset('css/leaflet.css')}}"/>
-
+<script src="{{asset('js/leaflet.js')}}"></script>
+{{-- <link rel="stylesheet" type="text/css" href="{{asset('DataTables/datatables.min.css')}}"/> --}}
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script type="text/javascript" src="{{asset('DataTables/datatables.min.js')}}"></script>
 <script src="{{ asset('DataTables/dataTables.select.min.js') }}"></script>
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body {
+  margin: 0;
+  font-family: "Lato", sans-serif;
+}
+
+.sidebar {
+  margin: 0;
+  padding: 0;
+  width: 320px;
+  background-color: #f1f1f1;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
+
+.sidebar a {
+  display: block;
+  color: black;
+  padding: 16px;
+  text-decoration: none;
+}
+
+.sidebar a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.sidebar a:hover:not(.active) {
+  background-color: #555;
+  color: white;
+}
+
+div.content {
+  margin-left: 100px;
+  padding: 1px 16px;
+  height: 1000px;
+}
+
+@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {float: left;}
+  div.content {margin-left: 0;}
+}
+
+@media screen and (max-width: 400px) {
+  .sidebar a {
+    text-align: center;
+    float: none;
+  }
+}
+</style>
+<div class="card">
 
     {{-- Desde AQUI --}}
-    <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
+    <div class="sidebar">
+        <a class="active" href="#home">Home</a>
         <font size=1.5>
             <h2 class="card-header">Unidades de Superficie</h2>
 
         <table id="tableID" class="table" >
-
             <thead class="thead-dark">
-
                 <tr>
-                    <th><img src="{{ asset('img/estnr.JPG')}} " style=" height: 30px; with: 30px;"></th>
                     <th scope="col">Codigo</th>
                     {{-- <th scope="col">Agencia</th> --}}
                     <th class="no-sort" scope="col">Ubicación </th>
@@ -35,7 +89,6 @@
                 @foreach($buques as $buque)
                 {{-- @foreach($buque->tracker->positions as $hist) --}}
                     <tr>
-                        <td></td>
                         <td><span style="color:#004c8c; font-weight: 600;"><a href="{{route('buque.view',$buque)}}">{{ $buque->code }}</a></span><br><span>{{ $buque->localidad->nombre }}</span></td>
                         {{-- <td>{{ $buque->localidad->nombre }}</td> --}}
                         <td><button type="button" class="btn btn-primary" onclick="locate({{$buque->tracker->positions[0]->lat}}, {{$buque->tracker->positions[0]->lon}})">Localizar</button></td>
@@ -52,23 +105,19 @@
             </tbody>
         </table>
     </font>
-    </div>
-    <div style="margin-left:25%">
-
-
-        <div class="w3-container w3-teal">
+      </div>
+        <div class="content" style="width: 95%;">
         <h2 class="card-header">Unidades de Superficie TRANSNAVAL</h2>
-        </div>
-        {{-- <nav class="w3-container" id="mapid" style="width:100%"></nav> --}}
         <div id="mapid" style="height: 850px;"></div>
+        {{-- <div id="mapid" style="height: 850px;"></div> --}}
+      </div>
 
-    </div>
-
+</div>
     {{-- Hasta AQUI --}}
 
 
 
-    <div style="margin-left:25%">
+<div class="content" style="width: 85%;">
     <h2 class="card-header">Unidades de Superficie</h2>
     <nav class="card-body" style="overflow-x:auto;">
         <table class="table" id="tableID2"   >
@@ -121,7 +170,7 @@ div.dt-buttons {
 <script>
 $(document).ready( function () {
     $('#tableID').DataTable( {
-        scrollY: 400,
+        scrollY: 500,
         lengthMenu: [
             [25, 50, 100, -1],
             [25, 50, 100,"TODO"]
@@ -133,28 +182,10 @@ $(document).ready( function () {
         buttons: [
             {
                 extend: 'print',
-                messageTop: '           UNIDADE DE SUPERFICIE       ',
                 exportOptions: {
-                    stripHtml : false,
                     columns: ':visible'
-                },
-                customize: function ( win ) {
-                    $(win.document.body)
-                        .css( 'font-size', '10pt' )
-                         .prepend(
-                             '<img src="{{ asset('img/estnr.JPG')}}" style="position:absolute; top:80; left:5; height: 100px; with: 100px;" />'
-                        );
-
-                    $(win.document.body).find( 'table' )
-                        .addClass( 'compact' )
-                        .css( 'font-size', 'inherit' );
-
-                },
+                }
             },
-
-            {extend: 'colvis',
-                        columns: ':not(.noVis)'},
-
             {
                 extend: 'excel',
                 exportOptions: {
@@ -162,7 +193,6 @@ $(document).ready( function () {
                 }
             }
         ],
-
         //"order": [[ 0, "desc" ]],
         "ordering": false,
         columnDefs: [
@@ -205,7 +235,7 @@ $(document).ready( function () {
 <script>
 $(document).ready( function () {
     $('#tableID2').DataTable( {
-        scrollY: 300,
+        scrollY: 500,
         lengthMenu: [
             [25, 50, 100, -1],
             [25, 50, 100,"TODO"]

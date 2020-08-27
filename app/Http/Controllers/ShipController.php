@@ -15,9 +15,16 @@ class ShipController extends Controller
         $buques=Buque::all();
         return view('buques.index',compact('buques'));
     }
+    public function index2() {
+        $buques=Buque::all();
+        return view('buques.index2',compact('buques'));
+    }
 
     public function view(Buque $buque) {
         return view('buques.view',compact('buque'));
+    }
+    public function viewRep(Buque $buque) {
+        return view('buques.viewRep',compact('buque'));
     }
 
     public function create() {

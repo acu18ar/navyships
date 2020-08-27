@@ -16,14 +16,8 @@ crossorigin=""></script>
     <h2 class="card-header">
         {{$buque->code}} - {{$buque->nombre}} - {{$buque->localidad->nombre}}
     </h2>
-
-    <div>
-        <tr>
-            <td><h5>{{$buque->description}} </h5></td>
-            <td><a class="btn btn-primary btn-lg" href="{{route('buque.viewRep',$buque)}}" role="button">Reporte</a></td>
-
-        </tr>
-    </div>
+    <p>{{$buque->description}}</p>
+    <h6>Rango de fechas: <input type="date" name="fechaesperada"><input type="date" name="fechaespderada"> <input type="submit" value="Generar"><input type="submit" value="Actualizar"></h6>
 
     <div class="card-body" >
 
