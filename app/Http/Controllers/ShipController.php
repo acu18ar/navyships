@@ -59,4 +59,9 @@ class ShipController extends Controller
         return $hist;
     }
 
+    public function getRange(Buque $buque, $from, $to){
+        $registros = Posicion::where('tracker_id',$buque->tracker->id)->where('created_at', '>', date($from))->where('created_at','<', date($to));
+    return $registros->get(); //para rep fechas
+    }
+
 }

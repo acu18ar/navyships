@@ -38,7 +38,7 @@
                         <td></td>
                         <td><span style="color:#004c8c; font-weight: 600;"><a href="{{route('buque.view',$buque)}}">{{ $buque->code }}</a></span><br><span>{{ $buque->localidad->nombre }}</span></td>
                         {{-- <td>{{ $buque->localidad->nombre }}</td> --}}
-                        <td><button type="button" class="btn btn-primary" onclick="locate({{$buque->tracker->positions[0]->lat}}, {{$buque->tracker->positions[0]->lon}})">Localizar</button></td>
+                        <td><button type="button" class="btn btn-primary" onclick="locate({{$buque->tracker->positions->last()->lat}}, {{$buque->tracker->positions->last()->lon}})">Localizar</button></td>
                         <td>
                             <form onsubmit="return confirm('Desea Eliminarlo?');" action="{{ route('buque.delete', $buque) }}" method="POST">
                                 {{ method_field('DELETE') }}
@@ -94,7 +94,7 @@
                         <td>{{ $buque->localidad->nombre }}</td>
                         {{-- <td>{{ $buque->tracker->positions }}</td> --}}
                         {{-- Me muestra solo el primer registro, necesito que solo muestre el ultimo registro --}}
-                        <td>{{$buque->tracker->positions[0]->lat}}, {{$buque->tracker->positions[0]->lon}}</td>
+                        <td>{{$buque->tracker->positions->last()->lat}}, {{$buque->tracker->positions->last()->lon}}</td>
                         <td><button type="button" class="btn btn-primary" onclick="locate({{$buque->tracker->lat}},{{$buque->tracker->lon}})">Localizar</button></td>
                         <td><a class="btn btn-primary" href="{{route('buque.view',$buque)}}" role="button">Ver Registros</a></td>
                         <td>

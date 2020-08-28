@@ -65,7 +65,7 @@ Route::middleware('checkAuth')->group(function () {
     Route::get('/buque/viewRep/{buque}','ShipController@viewRep')->name('buque.viewRep');
 
     Route::get('/api/buque/getDates/{buque}','ShipController@getDates')->name('buque.dates');
-
+    Route::get('/api/buque/getRange/{buque}/{from}/{to}','ShipController@getRange')->name('buque.dates'); //para rep por fechas
     Route::post('/buque/store','ShipController@store')->name('buque.store');
     Route::put('/buque/update/{buque}','ShipController@update')->name('buque.update');
     Route::delete('/buque/delete/{buque}','ShipController@destroy')->name('buque.delete');

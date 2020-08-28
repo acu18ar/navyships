@@ -16,7 +16,7 @@
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Codigo</th>
+                    <th scope="col">Codigo1</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Agencia</th>
                     <th class="no-sort" scope="col">Ubicación </th>

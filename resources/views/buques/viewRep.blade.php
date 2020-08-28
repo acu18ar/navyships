@@ -17,7 +17,8 @@ crossorigin=""></script>
         {{$buque->code}} - {{$buque->nombre}} - {{$buque->localidad->nombre}}
     </h2>
     <p>{{$buque->description}}</p>
-    <h6>Rango de fechas: <input type="date" name="fechaesperada"><input type="date" name="fechaespderada"> <input type="submit" value="Generar"><input type="submit" value="Actualizar"></h6>
+    <h6>Rango de fechas: <input type="date" id="desde"><input type="date" id="hasta">
+        <button onclick="Generar();">Generar</button></h6>
 
     <div class="card-body" >
         <table id="tableID" class="table" >
@@ -32,10 +33,8 @@ crossorigin=""></script>
                     <th class="no-sort" scope="col"></th>
                 </tr>
             </thead>
-            {{-- <tbody id="tBody"> --}}
-                @foreach($buque->tracker->positions as $hist)
+                {{-- @foreach($buque->tracker->positions as $hist)
                     <tr>
-                        {{-- <th scope="row">{{ $hist->id }}</th> --}}
                         <th scope="row"><input type="checkbox"></input></th>
                         <th scope="row">{{ $hist->id }}</th>
                         <th scope="row">{{ $hist->lat }}</th>
@@ -43,11 +42,14 @@ crossorigin=""></script>
                         <td>{{ $hist->created_at }}</td>
                         <td><button type="button" class="btn btn-primary" onclick="locate({{$hist->lat}},{{$hist->lon}})">LOCALIZAR</button></td>
                     </tr>
-                @endforeach
-                <div id="mapid" style="height: 400px;"></div>
-            {{-- </tbody> --}}
+                @endforeach--}}
+            <tbody id="tBody">
+
+             </tbody>
+
         </table>
-        {{-- <div id="mapid" style="height: 400px;"></div> --}}
+        <div id="mapid" style="height: 400px;"></div>
+
     </div>
 </div>
 <style>
@@ -56,6 +58,35 @@ div.dt-buttons {
     margin-left:20px;
 }
 </style>
+{{-- <script>
+    function Generar(){
+        var from = document.getElementById('desde').value;
+        var to = document.getElementById('hasta').value;
+        $.get(`/api/buque/getRange/${buque}/{from}/{to}`, function( data){
+            console.log(data);
+            var content = '';
+            var first = true;
+            data.forEach(function(item){
+                if (first){
+                    first = false;
+                    locate(item['lat'], item['lon']);
+                }
+                content+=`
+                    <tr>
+                        <th scope="row">${item['id']}</th>
+                        <th scope="row">${item['lat']}</th>
+                        <th scope="row">${item['lon']}</th>
+                        <th scope="row">${item['lon']}</th>
+                        <td>${item['created_at']}</td>
+                        <td><button type="button" class="btn btn-primary" onclick="locate(${item['lat']},${item['lon']})">LOCALIZAR</button></td>
+                    </tr>
+                    `;
+            });
+            document.getElementById('tbody').innerHTML=content;
+        });
+    }
+</script> --}}
+
 <script>
 $(document).ready( function () {
     $('#tableID').DataTable( {
@@ -116,27 +147,35 @@ var idBuque={{$buque->id}};
 //         console.log(data);
 //         var content='';
 //         var first=true;
-//         data.forEach(function(item){
-//             if (first) {
-//                 first=false;
-//                 locate(item['lat'],item['lon']);
-//             }
-//             content+=`
-//                 <tr>
-//                     {{--la actualizacion a llamada de WS--}}
-//                     <th scope="row"><input type="checkbox"></input></th>
-//                     <th scope="row">${item['id']}</th>
-//                     <th scope="row">${item['lat']}</th>
-//                     <th scope="row">${item['lon']}</th>
-//                     <td>${item['created_at']}</td>
-//                     <td><button type="button" class="btn btn-primary" onclick="locate(${item['lat']},${item['lon']})">LOCALIZAR</button></td>
-//                 </tr>
-//             `;
-//         });
-//         document.getElementById('tBody').innerHTML=content;
-//     });
-// }, 5000);
-var mymap = L.map('mapid').setView([-17.393879, -66.156943], 13);
+function Generar() {
+    var from=document.getElementById('desde').value;
+    var to=document.getElementById('hasta').value;
+    $.get(`/api/buque/getRange/${idBuque}/${from}/${to}`, function( data ) {
+        console.log(data);
+        var content='';
+        var first=true;
+
+        data.forEach(function(item){
+            if (first) {
+                first=false;
+                locate(item['lat'],item['lon']);
+            }
+            content+=`
+                <tr>
+                    {{--la actualizacion a llamada de WS--}}
+                    <th scope="row"><input type="checkbox"></input></th>
+                    <th scope="row">${item['id']}</th>
+                    <th scope="row">${item['lat']}</th>
+                    <th scope="row">${item['lon']}</th>
+                    <td>${item['created_at']}</td>
+                    <td><button type="button" class="btn btn-primary" onclick="locate(${item['lat']},${item['lon']})">LOCALIZAR</button></td>
+                </tr>
+            `;
+        });
+        document.getElementById('tBody').innerHTML=content;
+    });
+}
+var mymap = L.map('mapid').setView([-17.393879, -66.156943], 7);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(mymap);
@@ -156,7 +195,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 
 @if(isset($buque->tracker->positions[0]))
-    var marker = L.marker([{{$buque->tracker->positions[0]->lat}}, {{$buque->tracker->positions[0]->lon}}],{title: "TNR"}).addTo(mymap);
+    var marker = L.marker([{{$buque->tracker->positions->last()->lat}}, {{$buque->tracker->positions->last()->lon}}],{title: "TNR"}).addTo(mymap);
 @endif
 
 // para el rango de fechas las lineas de trayectoria...
