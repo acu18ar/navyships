@@ -20,7 +20,7 @@
       <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">TNR-TRACKER root</a>
       <ul class="nav nav-tabs">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="color:white;">
             <span style="color:white;" data-feather="users"></span>Usuarios</a>
           <div class="dropdown-menu">
             <a class="dropdown-item" href="{{ route('users.index') }}">Lista de Usuarios</a>
@@ -29,7 +29,7 @@
           </div>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="color:white;">
             <span style="color:white;" data-feather="map"></span>Localidades</a>
           <div class="dropdown-menu">
             <a class="dropdown-item" href="{{ route('localidades.index') }}">Lista de Localidades</a>
@@ -38,7 +38,7 @@
           </div>
         </li>
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="color:white;">
                 {{-- <span style="color:white;" data-feather="ship"></span> --}}
                 <i style="color:white;" class="fas fa-ship"></i>
                 Unidades de Superficie</a>
@@ -49,7 +49,7 @@
             </div>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="color:white;">
                 <i style="color:white;" class="fas fa-user-cog"></i>Tripulacion</a>
             <div class="dropdown-menu">
               <a class="dropdown-item" href="{{route('tripulacion.index')}}"> Lista de Tripulacion</a>
@@ -58,7 +58,7 @@
             </div>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="color:white;">
                 <i style="color:white;" class="fas fa-pager"></i>Tracker</a>
             <div class="dropdown-menu">
               <a class="dropdown-item" href="{{ route('trackers.index') }}"> Lista de Trackers</a>
@@ -67,7 +67,7 @@
             </div>
           </li>
         <li class="nav-item text-nowrap">
-        <a class="nav-link" href="{{ route('logout') }}">SALIR</a>
+        <a class="nav-link" href="{{ route('logout') }} " style="color:white;">SALIR</a>
         </li>
       </ul>
     </nav>

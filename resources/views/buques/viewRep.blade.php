@@ -22,6 +22,7 @@ crossorigin=""></script>
 
     <div class="card-body" >
         <table id="tableID" class="table" >
+            <tbody id="tBody">
             <thead class="thead-dark">
                 <tr>
                     {{-- <th scope="col">#</th> --}}
@@ -43,14 +44,18 @@ crossorigin=""></script>
                         <td><button type="button" class="btn btn-primary" onclick="locate({{$hist->lat}},{{$hist->lon}})">LOCALIZAR</button></td>
                     </tr>
                 @endforeach--}}
-            <tbody id="tBody">
+            {{-- <tbody id="tBody"> --}}
 
              </tbody>
 
         </table>
+        <p>
+            <input type="button" value="Print Table" onclick="myApp.printTable()" />
+        </p>
         <div id="mapid" style="height: 400px;"></div>
 
     </div>
+
 </div>
 <style>
 div.dt-buttons {
@@ -161,6 +166,17 @@ function Generar() {
                 locate(item['lat'],item['lon']);
             }
             content+=`
+            <thead class="thead-dark">
+                <tr>
+                    {{-- <th scope="col">#</th> --}}
+                    <th scope="col">V</th>
+                    <th scope="col">#</th>
+                    <th scope="col">Latitud</th>
+                    <th scope="col">Longitud</th>
+                    <th scope="col">Fecha y Hora</th>
+                    <th class="no-sort" scope="col"></th>
+                </tr>
+            </thead>
                 <tr>
                     {{--la actualizacion a llamada de WS--}}
                     <th scope="row"><input type="checkbox"></input></th>
@@ -218,3 +234,14 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 //     }
 // </script>
 @endsection
+<script>
+    var myApp = new function () {
+        this.printTable = function () {
+            var tab = document.getElementById('tableID');
+            var win = window.open('', '', 'height=700,width=700');
+            win.document.write(tab.outerHTML);
+            win.document.close();
+            win.print();
+        }
+    }
+</script>

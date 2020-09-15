@@ -181,10 +181,13 @@ $(document).ready( function () {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(mymap);
 
+
+
     @if(isset($buque->tracker->positions[0]))
         var marker = L.marker([{{$buque->tracker->positions[0]->lat}}, {{$buque->tracker->positions[0]->lon}}]).addTo(mymap);
-        marker.bindPopup("{{$buque->nombre}}").openPopup();
+
     @endif
+
     // Necesitaba colocar nombre al marker, solo da el primer registro
     // @foreach($buques as $buque))
     //     var marker = L.marker([{{$buque->tracker->positions[0]->lat}}, {{$buque->tracker->positions[0]->lon}}]).addTo(mymap);
@@ -237,30 +240,3 @@ $(document).ready( function () {
 });
 </script>
 @endsection
-
-<?php
-  // Una vez que el búfer almacena nuestro contenido utilizamos "ob_end_flush" para usarlo y deshabilitar el búfer
-  ob_end_flush();
-
-  // Función para eliminar todos los espacios en blanco
- function comprimir_pagina($buffer) {
-
-    $search = array(
-        '/\>[^\S ]+/s',     // elimina espacios en blanco después de las etiquetas, excepto el espacio
-        '/[^\S ]+\</s',     // elimina en blanco antes de las etiquetas, excepto el espacio
-        '/(\s)+/s',         // Acortar múltiples secuencias de espacios en blanco.
-        '/<!--(.|\s)*?-->/' // Borrar comentarios html
-    );
-
-    $replace = array(
-        '>',
-        '<',
-        '\\1',
-        ''
-    );
-
-    $buffer = preg_replace($search, $replace, $buffer);
-
-    return $buffer;
-   }
-?>

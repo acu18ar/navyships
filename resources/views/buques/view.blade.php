@@ -13,14 +13,14 @@ crossorigin=""></script>
 <script type="text/javascript" src="{{asset('DataTables/datatables.min.js')}}"></script>
 <script src="{{ asset('DataTables/dataTables.select.min.js') }}"></script>
 <div class="card" style="overflow-x:auto;">
-    <h2 class="card-header">
+    <h4 class="card-header">
         {{$buque->code}} - {{$buque->nombre}} - {{$buque->localidad->nombre}}
-    </h2>
+    </h4>
 
     <div>
         <tr>
-            <td><h5>{{$buque->description}} </h5></td>
-            <td><a class="btn btn-primary btn-lg" href="{{route('buque.viewRep',$buque)}}" role="button">Reporte</a></td>
+            <th><h6>{{$buque->description}} </h6></th>
+            <th><a class="btn btn-primary btn-sm" href="{{route('buque.viewRep',$buque)}}" role="button">Reporte</a></th>
 
         </tr>
     </div>
@@ -53,7 +53,7 @@ crossorigin=""></script>
                 @endforeach
             </tbody>
         </table>
-        <div id="mapid" style="height: 400px;"></div>
+        <div id="mapid" style="height: 800px;"></div>
     </div>
 </div>
 <style>
@@ -65,7 +65,7 @@ div.dt-buttons {
 <script>
 $(document).ready( function () {
     $('#tableID').DataTable( {
-        scrollY: 200,
+        scrollY: 100,
         lengthMenu: [
             [25, 50, 100, -1],
             [25, 50, 100,"TODO"]
@@ -106,8 +106,8 @@ $(document).ready( function () {
                 }
             }
         ],
-        //"order": [[ 0, "desc" ]],
-        "ordering": false,
+        "order": [[ 1, "desc" ]],
+        "ordering": true,
         columnDefs: [
             { orderable: false, targets: "no-sort"}
         ],

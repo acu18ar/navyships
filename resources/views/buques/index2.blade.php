@@ -20,7 +20,6 @@
                     <th scope="col">Codigo</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Agencia</th>
-                    <th class="no-sort" scope="col">Ubicación </th>
                     <th class="no-sort" scope="col">Registros</th>
                     <th class="no-sort" scope="col">Acciones</th>
                 </tr>
@@ -34,7 +33,6 @@
                         <td><a href="{{route('buque.view',$buque)}}">{{ $buque->code }}</a></td>
                         <td>{{ $buque->nombre }}</td>
                         <td>{{ $buque->localidad->nombre }}</td>
-                        <td><button type="button" class="btn btn-primary" onclick="locate({{$buque->tracker->lat}},{{$buque->tracker->lon}})">Localizar</button></td>
                         <td><a class="btn btn-primary" href="{{route('buque.view',$buque)}}" role="button">Ver Registros</a></td>
                         <td>
                             <form onsubmit="return confirm('Desea Eliminarlo?');" action="{{ route('buque.delete', $buque) }}" method="POST">
