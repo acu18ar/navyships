@@ -55,13 +55,12 @@ class ShipController extends Controller
     }
 
     public function getDates(Buque $buque) {
-        $hist=Posicion::where('tracker_id',$buque->tracker->id)->orderBy('id', 'desc')->take(10)->get();
+        $hist=Posicion::where('tracker_id',$buque->tracker->id)->orderBy('created_at', 'desc')->take(10)->get();
         return $hist;
     }
 
     public function getRange(Buque $buque, $from, $to){
-        $registros = Posicion::where('tracker_id',$buque->tracker->id)->where('created_at', '>', date($from))->where('created_at','<', date($to));
-    return $registros->get(); //para rep fechas
+        $registros = Posicion::where('tracker_id',$buque->tracker->id)->where('created_at', '>=', date($from))->where('created_at','<=', date($to));
+        return $registros->get(); //para rep fechas
     }
-
 }

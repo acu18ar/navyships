@@ -152,6 +152,7 @@ var idBuque={{$buque->id}};
 //         console.log(data);
 //         var content='';
 //         var first=true;
+
 function Generar() {
     var from=document.getElementById('desde').value;
     var to=document.getElementById('hasta').value;
@@ -159,24 +160,15 @@ function Generar() {
         console.log(data);
         var content='';
         var first=true;
-
+        mymap.removeLayer(ruta);
+        var routeShip=[];
         data.forEach(function(item){
             if (first) {
                 first=false;
                 locate(item['lat'],item['lon']);
             }
+            routeShip.push([item['lat'],item['lon']]);
             content+=`
-            <thead class="thead-dark">
-                <tr>
-                    {{-- <th scope="col">#</th> --}}
-                    <th scope="col">V</th>
-                    <th scope="col">#</th>
-                    <th scope="col">Latitud</th>
-                    <th scope="col">Longitud</th>
-                    <th scope="col">Fecha y Hora</th>
-                    <th class="no-sort" scope="col"></th>
-                </tr>
-            </thead>
                 <tr>
                     {{--la actualizacion a llamada de WS--}}
                     <th scope="row"><input type="checkbox"></input></th>
@@ -188,9 +180,12 @@ function Generar() {
                 </tr>
             `;
         });
+        ruta = L.polyline(routeShip,{color:'black'}).addTo(mymap);
         document.getElementById('tBody').innerHTML=content;
     });
 }
+
+
 var mymap = L.map('mapid').setView([-17.393879, -66.156943], 7);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

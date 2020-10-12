@@ -38,7 +38,8 @@
                         <td></td>
                         <td><span style="color:#004c8c; font-weight: 600;"><a href="{{route('buque.view',$buque)}}">{{ $buque->code }}</a></span><br><span>{{ $buque->localidad->nombre }}</span></td>
                         {{-- <td>{{ $buque->localidad->nombre }}</td> --}}
-                        <td><button type="button" class="btn btn-primary" onclick="locate({{$buque->tracker->positions->last()->lat}}, {{$buque->tracker->positions->last()->lon}})">Localizar</button></td>
+                        {{-- <td><button type="button" class="btn btn-primary" onclick="locate({{$buque->tracker->positions->last()->lat}}, {{$buque->tracker->positions->last()->lon}})">Localizar</button></td> --}}
+                        <td><button type="button" class="btn btn-primary" onclick="locate('{{$buque->nombre}}')">Localizar</button></td>
                         <td>
                             <form onsubmit="return confirm('Desea Eliminarlo?');" action="{{ route('buque.delete', $buque) }}" method="POST">
                                 {{ method_field('DELETE') }}
@@ -95,7 +96,7 @@
                         {{-- <td>{{ $buque->tracker->positions }}</td> --}}
                         {{-- Me muestra solo el primer registro, necesito que solo muestre el ultimo registro --}}
                         <td>{{$buque->tracker->positions->last()->lat}}, {{$buque->tracker->positions->last()->lon}}</td>
-                        <td><button type="button" class="btn btn-primary" onclick="locate({{$buque->tracker->lat}},{{$buque->tracker->lon}})">Localizar</button></td>
+                        <td><button type="button" class="btn btn-primary" onclick="locate({{$buque->tracker->positions->last()->lat}}, {{$buque->tracker->positions->last()->lon}})">Localizar</button></td>
                         <td><a class="btn btn-primary" href="{{route('buque.view',$buque)}}" role="button">Ver Registros</a></td>
                         <td>
                             <form onsubmit="return confirm('Desea Eliminarlo?');" action="{{ route('buque.delete', $buque) }}" method="POST">
@@ -182,25 +183,31 @@ $(document).ready( function () {
     }).addTo(mymap);
 
 
+    var markers=[];
+    var marker = null;
+    @foreach($buques as $buque)
+        @if(isset($buque->tracker->positions[0]))
+            marker=L.marker([{{$buque->tracker->positions[0]->lat}}, {{$buque->tracker->positions[0]->lon}}]).addTo(mymap);
+            marker.bindPopup('{!!$buque->nombre!!}').openPopup();
+            markers.push(['{!!$buque->nombre!!}', marker]);
+        @endif
+    @endforeach
 
-    @if(isset($buque->tracker->positions[0]))
-        var marker = L.marker([{{$buque->tracker->positions[0]->lat}}, {{$buque->tracker->positions[0]->lon}}]).addTo(mymap);
-
-    @endif
-
-    // Necesitaba colocar nombre al marker, solo da el primer registro
-    // @foreach($buques as $buque))
-    //     var marker = L.marker([{{$buque->tracker->positions[0]->lat}}, {{$buque->tracker->positions[0]->lon}}]).addTo(mymap);
-    //     marker.bindPopup("{{$buque->nombre}}").openPopup();
-    // @endforeach
 
 </script>
 <script>
-        function locate(lat, lng) {
-            var newLatLng = new L.LatLng(lat, lng);
-            marker.setLatLng(newLatLng);
-            mymap.setView(marker.getLatLng(),mymap.getZoom());
+    function locate(nombre) {
+            markers.forEach(function (item) {
+                console.log(nombre);
+
+                if (item[0]==nombre) {
+                    mymap.setView(item[1].getLatLng(),mymap.getZoom());
+                    item[1].openPopup();
+                }
+            });
         }
+
+
 </script>
 
 

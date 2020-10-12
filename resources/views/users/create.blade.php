@@ -6,23 +6,26 @@
         Registrar Usuario
     </h2>
     <div class="card-body">
-        <form method="POST" action="{{ route('user.store')  }}">
+        <div id="basic-form" class="section">
+        <div class="row">
+        <div class="col s-12 m8 offset-m2">
+        <form class="col s12" method="POST" action="{{ route('user.store')  }}">
             {{csrf_field()}}
-            <div class="form-group">
+            <div class="col s12">
                 <label for="username">Nombre de Usuario</label>
                 <input type="text" class="form-control" id="username" name="username" required>
             </div>
-            <div class="form-group">
+            <div class="form-group col s12">
                 <label for="email">Correo Electronico</label>
                 <input type="email" class="form-control" id="email" name="email" required>
             </div>
-            <div class="form-group">
+            <div class="form-group col s12">
                 <label for="password">Contraseña</label>
-                <input type="password" class="form-control" id="password" name="password" pattern="[A-Za-z][A-Za-z0-9]*[0-9][A-Za-z0-9]*" title="Una contraseña válida es un conjuto de caracteres, donde cada uno consiste de una letra mayúscula o minúscula, o un dígito. La contraseña debe empezar con una letra y contener al menor un dígito" required>
+                <input type="password" class="form-control" id="password" name="password" pattern="[A-Za-z][A-Za-z0-9]*[0-9][A-Za-z0-9]*" title="Una contraseña válida es un conjuto de caracteres, que consiste de una letra mayúscula o minúscula, o un dígito. La contraseña debe empezar con una letra, contener al menos un dígito y 8 caracteres como minimo" required>
             </div>
-            <div class="form-group">
+            <div class="form-group col s12">
                 <label for="grado">Grado</label>
-                <select class="form-control" id="grado" name="grado" required>
+                <select class="form-control col s12" id="grado" name="grado" required>
                     <option selected="true" disabled="disabled">--Seleccione un Grado--</option>
                     <option value="Almirante">Almirante</option>
                     <option value="Vice Almirante">Vice Almirante</option>
@@ -43,17 +46,17 @@
                     <option value="SG. I.">SG. I.</option>
                 </select>
             </div>
-            <div class="form-group">
+            <div class="form-group col s12">
                 <label for="first_name">Nombres</label>
                 <input type="text" class="form-control" id="first_name" name="first_name" required>
             </div>
-            <div class="form-group">
+            <div class="form-group col s12">
                 <label for="last_name">Apellidos</label>
                 <input type="text" class="form-control" id="last_name" name="last_name" required>
             </div>
-            <div class="form-group">
+            <div class="form-group col s12">
                 <label for="role_id">Rol</label>
-                <select class="form-control" id="role_id" name="role_id">
+                <select class="form-control col s12" id="role_id" name="role_id">
                     <option selected="true" disabled="disabled">--Seleccione un Rol--</option>
                     @foreach($roles as $rol)
                         <option value="{{ $rol->id }}">{{ $rol->name }}</option>
@@ -62,6 +65,9 @@
             </div>
             <button type="submit" class="btn btn-block btn-primary">Registrar</button>
         </form>
+        </div>
+        </div>
+        </div>
     </div>
 </div>
 @endsection

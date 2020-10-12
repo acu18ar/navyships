@@ -25,6 +25,9 @@ class UserSeeder extends Seeder
         Role::create([
             'name' => 'Gerente'
         ]);
+        Role::create([
+            'name' => 'Comandante TNR'
+        ]);
 
 
         User::create([
