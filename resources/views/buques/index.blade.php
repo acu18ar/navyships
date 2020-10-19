@@ -1,4 +1,3 @@
-
 @extends('layouts.'.Auth::user()->role->name)
 {{-- realizar un if para ver si puede eliminar o editar.. --}}
 @section('title','Unidades de Superficie1')
@@ -181,8 +180,6 @@ $(document).ready( function () {
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(mymap);
-
-
     var markers=[];
     var marker = null;
     @foreach($buques as $buque)
@@ -192,8 +189,6 @@ $(document).ready( function () {
             markers.push(['{!!$buque->nombre!!}', marker]);
         @endif
     @endforeach
-
-
 </script>
 <script>
     function locate(nombre) {
@@ -206,11 +201,7 @@ $(document).ready( function () {
                 }
             });
         }
-
-
 </script>
-
-
 //para reportes
 <script>
 $(document).ready( function () {

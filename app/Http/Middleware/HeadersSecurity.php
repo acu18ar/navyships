@@ -31,3 +31,4 @@ class HeadersSeguros
             header_remove($cabecera);
     }
 }
+
