@@ -34,7 +34,7 @@
               <a class="dropdown-item" href="{{route('tripulacion.create')}}">Registrar Tripulacion</a>
             </div>
           </li>
-          <li class="nav-item dropdown">
+          {{-- <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="color:white;">
                 <i style="color:white;" class="fas fa-pager"></i>Tracker</a>
             <div class="dropdown-menu">
@@ -42,7 +42,7 @@
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="{{ route('tracker.create') }}">Registrar Trackers</a>
             </div>
-          </li>
+          </li> --}}
         <li class="nav-item text-nowrap">
         <a class="nav-link" href="{{ route('logout') }} " style="color:white;">SALIR</a>
         </li>

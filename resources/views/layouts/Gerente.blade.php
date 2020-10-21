@@ -15,74 +15,54 @@
     <script src="{{asset('js/jquery.min.js')}}"></script>
   </head>
 
-  <body>
+   <body>
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
       <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">TNR-TRACKER Gerencia</a>
-      <ul class="navbar-nav px-3">
+      <ul class="nav nav-tabs">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="color:white;">
+                {{-- <span style="color:white;" data-feather="ship"></span> --}}
+                <i style="color:white;" class="fas fa-ship"></i>
+                Unidades de Superficie</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="{{ route('buques.index') }}">Lista de UU.SS.</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{{ route('buque.create') }}">Registrar UU.SS.</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="color:white;">
+                <i style="color:white;" class="fas fa-user-cog"></i>Tripulacion</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="{{route('tripulacion.index')}}"> Lista de Tripulacion</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{{route('tripulacion.create')}}">Registrar Tripulacion</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="color:white;">
+                <i style="color:white;" class="fas fa-pager"></i>Tracker</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="{{ route('trackers.index') }}"> Lista de Trackers</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{{ route('tracker.create') }}">Registrar Trackers</a>
+            </div>
+          </li>
         <li class="nav-item text-nowrap">
-        <a class="nav-link" href="{{ route('logout') }}">SALIR</a>
+        <a class="nav-link" href="{{ route('logout') }} " style="color:white;">SALIR</a>
         </li>
       </ul>
     </nav>
 
-    <div class="container-fluid">
-      <div class="row">
-        <nav class="col-md-2 d-none d-md-block bg-light sidebar bg-dark">
-          <div class="sidebar-sticky">
-            <ul class="nav flex-column">
-              <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                <span style="color:white;">Unidades de Superficie</span>
-              </h6>
-              <li class="nav-item">
-                <a class="nav-link text-light" href="{{ route('buques.index') }}">
-                    <i class="fas fa-ship"></i>
-                    Lista de UU.SS. <!--Las listas incluye opciones de editar y eliminar -->
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-light" href="{{ route('buque.create') }}">
-                  <span style="color:white;" data-feather="plus-square"></span>
-                  Registrar UU.SS.
-                </a>
-              </li>
-              <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                <span style="color:white;">Tripulacion</span><!-- aun se debe ver -->
-              </h6>
-              <li class="nav-item">
-                <a class="nav-link text-light" href="{{route('tripulacion.index')}}">
-                    <i class="fas fa-users"></i>
-                    Lista de Tripulacion
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-light" href="{{route('tripulacion.create')}}">
-                    <i class="fas fa-user-cog"></i>
-                    Registrar Tripulacion
-                </a>
-              </li>
-              {{-- <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                <span style="color:white;">Localidades</span> <!--Solo ve el administrador a los usuarios -->
-              </h6>
-              <li class="nav-item">
-                <a class="nav-link text-light" href="">
-                  <span style="color:white;" data-feather="command"></span>
-                  Lista de Localidades
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-light" href="">
-                  <span style="color:white;" data-feather="plus-circle"></span>
-                  Registrar Localidad
-                </a> --}}
-              </li>
-            </ul>
-          </div>
-        </nav>
 
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+
+    <div class="container-fluid">
+
+
+        <main role="main" >
           @yield('content')
         </main>
-      </div>
+
     </div>
     <script src="{{asset('js/popper.min.js')}}"></script>
     <script src="{{asset('js/bootstrap.min.js')}}"></script>
