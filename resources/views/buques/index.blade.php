@@ -184,7 +184,8 @@ $(document).ready( function () {
     var marker = null;
     @foreach($buques as $buque)
         @if(isset($buque->tracker->positions[0]))
-            marker=L.marker([{{$buque->tracker->positions[0]->lat}}, {{$buque->tracker->positions[0]->lon}}]).addTo(mymap);
+            marker=L.marker([{{$buque->tracker->positions->last()->lat}}, {{$buque->tracker->positions->last()->lon}}]).addTo(mymap);
+
             marker.bindPopup('{!!$buque->nombre!!}').openPopup();
             markers.push(['{!!$buque->nombre!!}', marker]);
         @endif
