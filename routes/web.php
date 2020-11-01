@@ -90,5 +90,5 @@ Route::middleware('checkAuth')->group(function () {
 Route::get('/api/storePosition/clean/{data}','PosicionController@store');//API
 // Route::get('/api/storePosition/{id}/{lat}/{lon}/{fh_posicion}/{vel}','PosicionController@store2');//API
 Route::get('/api/storePosition/{id}/{lat}/{lon}/','PosicionController@store2');//API
-
+// almacenamiento con fechas a ser guardadas
 Route::get('/api/storePosition/saved/{id}/{lat}/{lon}/{fh_posicion}/{vel}','PosicionController@store3');//API
