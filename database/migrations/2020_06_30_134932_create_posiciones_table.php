@@ -18,12 +18,11 @@ class CreatePosicionesTable extends Migration
             $table->string('lat',45);
             $table->string('lon',45);
             $table->foreignId('tracker_id')->nullable()->constrained('trackers')->onDelete('cascade');
-            $table->dateTime('fh_posicion')->nullable();
-            $table->string('vel',20)->nullable();
+            // $table->dateTime('fh_posicion')->nullable();
+            // $table->string('vel',20)->nullable();
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *
