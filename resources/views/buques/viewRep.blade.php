@@ -13,10 +13,10 @@ crossorigin=""></script>
 <script type="text/javascript" src="{{asset('DataTables/datatables.min.js')}}"></script>
 <script src="{{ asset('DataTables/dataTables.select.min.js') }}"></script>
 <div class="card" style="overflow-x:auto;">
-    <h2 class="card-header">
+    <h3 class="card-header" style="height: 50px;">
         {{$buque->code}} - {{$buque->nombre}} - {{$buque->localidad->nombre}}
-    </h2>
-    <p>{{$buque->description}}</p>
+    </h3>
+    <p style="height: 10px;">{{$buque->description}}</p>
     <h6>Rango de fechas: <input type="date" id="desde"><input type="date" id="hasta">
         <button onclick="Generar();">Generar</button></h6>
 
@@ -52,7 +52,7 @@ crossorigin=""></script>
         <p>
             <input type="button" value="Print Table" onclick="myApp.printTable()" />
         </p>
-        <div id="mapid" style="height: 400px;"></div>
+        <div id="mapid" style="height: 600px;"></div>
 
     </div>
 
@@ -95,7 +95,7 @@ div.dt-buttons {
 <script>
 $(document).ready( function () {
     $('#tableID').DataTable( {
-        scrollY: 200,
+        scrollY: 100,
         lengthMenu: [
             [25, 50, 100, -1],
             [25, 50, 100,"TODO"]

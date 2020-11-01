@@ -1,7 +1,5 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,7 +10,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
     return view('login');
 })->name('login');
@@ -28,7 +25,6 @@ Route::get('/Error/{mensaje}',function($mensaje) {
 
 //login
 Route::post('/enter/system','UserController@doLogin')->name('enter.system');
-
 Route::middleware('checkAuth')->group(function () {
     //acciones
     Route::get('/acciones/index','AccionController@index')->name('acciones.index');
@@ -57,7 +53,9 @@ Route::middleware('checkAuth')->group(function () {
     Route::post('/location/user/store','UserController@localidadUserStore')->name('localidad.user.store');
 
     //Buques
+    //Route::get('/buques/index','ShipController@index')->name('buques.index'); se cambia a tracker index por que si se guarda se debe tambien crear un tracker y tener posiciones si no
     Route::get('/buques/index','ShipController@index')->name('buques.index');
+
     Route::get('/buques/index2','ShipController@index2')->name('buques.index2'); //la segunda por si acaso
     Route::get('/buque/create','ShipController@create')->name('buque.create');
     Route::get('/buque/edit/{buque}','ShipController@edit')->name('buque.edit');
@@ -90,4 +88,7 @@ Route::middleware('checkAuth')->group(function () {
 });
 
 Route::get('/api/storePosition/clean/{data}','PosicionController@store');//API
-Route::get('/api/storePosition/{id}/{lat}/{lon}','PosicionController@store2');//API
+// Route::get('/api/storePosition/{id}/{lat}/{lon}/{fh_posicion}/{vel}','PosicionController@store2');//API
+Route::get('/api/storePosition/{id}/{lat}/{lon}/','PosicionController@store2');//API
+
+Route::get('/api/storePosition/saved/{id}/{lat}/{lon}/{fh_posicion}/{vel}','PosicionController@store3');//API

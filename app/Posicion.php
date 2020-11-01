@@ -11,7 +11,10 @@ class Posicion extends Model
     protected $fillable = [
         'lat',
         'lon',
-        'tracker_id'
+        'tracker_id',
+        'fh_posicion',
+        'vel'
+
     ];
 
     public function tracker() {

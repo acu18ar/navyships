@@ -35,7 +35,9 @@ crossorigin=""></script>
                     <th scope="col">#</th>
                     <th scope="col">Latitud</th>
                     <th scope="col">Longitud</th>
-                    <th scope="col">Fecha y Hora</th>
+                    <th scope="col">Fecha y Hora UUSS</th>
+                    <th scope="col">Velocidad</th>
+                    <th scope="col">Fecha y Hora UUSS</th>
                     <th class="no-sort" scope="col"></th>
                 </tr>
             </thead>
@@ -47,6 +49,8 @@ crossorigin=""></script>
                         <th scope="row">{{ $hist->id }}</th>
                         <th scope="row">{{ $hist->lat }}</th>
                         <th scope="row">{{ $hist->lon }}</th>
+                        <th scope="row">{{ $hist->fh_posicion }}</th>
+                        <th scope="row">{{ $hist->vel }}</th>
                         <td>{{ $hist->created_at }}</td>
                         <td><button type="button" class="btn btn-primary" onclick="locate({{$hist->lat}},{{$hist->lon}})">LOCALIZAR</button></td>
                     </tr>
@@ -77,7 +81,7 @@ $(document).ready( function () {
         buttons: [
             {
                 extend: 'print',
-                messageTop: '           UNIDADE DE SUPERFICIE       ',
+                messageTop: '           UNIDADES DE SUPERFICIE       ',
                 exportOptions: {
                     stripHtml : false,
                     columns: ':visible'
@@ -134,6 +138,8 @@ setInterval(function(){
                     <th scope="row">${item['id']}</th>
                     <th scope="row">${item['lat']}</th>
                     <th scope="row">${item['lon']}</th>
+                    <th scope="row">${item['fh_posicion']}</th>
+                    <th scope="row">${item['vel']}</th>
                     <td>${item['created_at']}</td>
                     <td><button type="button" class="btn btn-primary" onclick="locate(${item['lat']},${item['lon']})">LOCALIZAR</button></td>
                 </tr>

@@ -14,7 +14,8 @@ class PosicionController extends Controller
         Posicion::create([
             'lat' => $datos[1],
             'lon' => $datos[2],
-            'tracker_id' => $datos[0]
+            'tracker_id' => $datos[0],
+            'fh_posicion' => $datos[3]
         ]);
         return "OK";
     }
@@ -23,6 +24,16 @@ class PosicionController extends Controller
             'lat' => $lat,
             'lon' => $lon,
             'tracker_id' => $id
+        ]);
+        return "OK";
+    }
+    public function store3($id,$lat,$lon,$fh, $vel) {
+        Posicion::create([
+            'lat' => $lat,
+            'lon' => $lon,
+            'tracker_id' => $id,
+            'fh_posicion' => $fh,
+            'vel' => $vel
         ]);
         return "OK";
     }

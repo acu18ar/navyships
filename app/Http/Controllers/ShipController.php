@@ -35,7 +35,8 @@ class ShipController extends Controller
     public function store(Request $request) {
         $data=$request->all();
         Buque::create($data);
-        return redirect()->route('buques.index');
+        // return redirect()->route('buques.index');
+        return redirect()->route('trackers.index');
     }
 
     public function edit(Buque $buque) {
@@ -53,6 +54,9 @@ class ShipController extends Controller
         $buque->delete();
         return redirect()->route('buque.index');
     }
+
+
+    // aca modificaremos para la fh actual
 
     public function getDates(Buque $buque) {
         $hist=Posicion::where('tracker_id',$buque->tracker->id)->orderBy('created_at', 'desc')->take(10)->get();
