@@ -37,4 +37,13 @@ class PosicionController extends Controller
         ]);
         return "OK";
     }
+    public function store4($id,$lat,$lon,$fh) {
+        Posicion::create([
+            'lat' => $lat,
+            'lon' => $lon,
+            'tracker_id' => $id,
+            'fh_posicion' => $fh
+        ]);
+        return "OK";
+    }
 }
