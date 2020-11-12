@@ -94,3 +94,6 @@ Route::get('/api/storePosition/{id}/{lat}/{lon}/','PosicionController@store2');/
 Route::get('/api/storePosition/saved/{id}/{lat}/{lon}/{fh_posicion}/{vel}','PosicionController@store3');//API
 
 Route::get('/api/storePosition/free/{id}/{lat}/{lon}/{fh_posicion}/','PosicionController@store4');//API
+
+
+// http://104.154.54.192/api/storePosition/saved/2/-17.3837462/-66.1572946/2020-11-04 14:30:25/15
