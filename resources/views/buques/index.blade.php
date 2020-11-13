@@ -176,8 +176,8 @@ $(document).ready( function () {
     //    window.location.reload(1);
     // }, 10000);
     var mymap = L.map('mapid').setView([-17.393879, -66.156943], 13);
-    L.tileLayer('{{asset('mapas/{z}/{x}/{y}.png')}}', {
-    // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    // L.tileLayer('{{asset('mapas/{z}/{x}/{y}.png')}}', {
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(mymap);
     var markers=[];
